@@ -1,0 +1,68 @@
+    <form role="form">
+        <div class="form-group">
+            <div class="col-xs-4 filtermargin">
+                <div class="dropdown">
+                    <button class="btn dropdownButton dropdown-toggle btn-index tsgDropdownColor" type="button"
+                            data-toggle="dropdown">
+                        <span ng-hide="filterTSG" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                        <span ng-hide="filterTSG">Loading</span> <span ng-show="filterTSG">TSG </span> <span ng-show="filterTSG" class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" ng-click="showList($event)">
+                        <li ng-repeat="TSG in filterTSG" ng-click="toggleTsg(TSG)" ng-class="{true:'glyphicon glyphicon-ok selected', false:'unselected'}[tsg.indexOf(TSG) > -1]">
+                            <span></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+	<div class="col-xs-4 filtermargin">
+                <div class="dropdown">
+                    <button class="btn dropdownButton dropdown-toggle btn-index statusDropdownColor" type="button"
+                            data-toggle="dropdown">
+                        <span ng-hide="filterASG" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                        <span ng-hide="filterASG">Loading</span>
+                        <span ng-show="filterASG">Status</span>
+                        <span ng-show="filterASG" class="caret"></span>
+
+                    </button>
+                    <ul class="dropdown-menu" ng-click="showList($event)">
+                        <li ng-repeat="ASG in filterASG" ng-click="toggleSelection(status)" ng-class="{true:'glyphicon glyphicon-ok selected', false:'unselected'}[selection.indexOf(status) > -1]">
+                            <span></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>        
+
+    
+	<div class="col-xs-4 filtermargin">
+                <div class="dropdown ">
+                    <button class="btn dropdownButton dropdown-toggle btn-index locationDropdownColor" type="button"
+                            data-toggle="dropdown">
+                        <span ng-hide="filterLocation" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                        <span ng-hide="filterLocation">Loading</span>
+                        <span ng-show="filterLocation">Location </span>
+                        <span ng-show="filterLocation" class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" ng-click="showList($event)">
+                        <li ng-repeat="Location in filterLocation" ng-click="toggleLocation(Location)" ng-class="{true:'glyphicon glyphicon-ok selected', false:'unselected'}[location.indexOf(Location) > -1]">
+                            <span> </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+                    <div class="col-xs-12 filtermargin">
+            <button class="btn btn-info dropdownButton pull-right" type="button"
+                    ng-click="submit()">Submit</button>
+            <button class="btn btn-danger dropdownButton pull-right" type="button"
+                    ng-click="reset()">Reset</button>
+        </div>
+        <br/>
+
+
+        </div>
+    </form>
+
+</script>
+
+
+

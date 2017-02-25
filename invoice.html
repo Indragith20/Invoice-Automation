@@ -1,0 +1,1273 @@
+    <!DOCTYPE html>
+    <html ng-app="app">
+    <head>
+        <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="../SiteAssets/InvoiceAutomation/bootstrap.min.css" />
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+        <script src="../SiteAssets/InvoiceAutomation/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-route.js"></script>
+        
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.7/angular-filter.js"></script>
+        <script src="../SiteAssets/InvoiceAutomation/jquery-ui.js"></script>
+            <link rel="stylesheet" href="../SiteAssets/InvoiceAutomation/jquery-ui.css" />    
+        
+        <script type="text/javascript" src="../SiteAssets/InvoiceAutomation/MainController.js"></script>
+    	<script type="text/javascript" src="../SiteAssets/InvoiceAutomation/homeController.js"></script>
+    	<script type="text/javascript" src="../SiteAssets/InvoiceAutomation/modifyController.js"></script>
+    	<script type="text/javascript" src="../SiteAssets/InvoiceAutomation/invoiceController.js"></script>
+        <script type="text/javascript" src="../SiteAssets/InvoiceAutomation/rdashboard.js"></script>
+        <script type="text/javascript" src="../SiteAssets/InvoiceAutomation/credentialsController.js"></script>
+        <script type="text/javascript" src="../SiteAssets/InvoiceAutomation/configController.js"></script>
+        <script type="text/javascript" src="../SiteAssets/InvoiceAutomation/allocateController.js"></script>
+    	<script src="../SiteAssets/DemandmanagementTestApp/dirPagination.js"></script>
+        <script src="../SiteAssets/InvoiceAutomation/alasql.min.js"></script>
+        <script src="../SiteAssets/InvoiceAutomation/xlsx.core.min.js"></script>
+        
+
+        <style>
+
+            @font-face {
+                font-family: 'AccentureFont';
+                src: url('https://ts.accenture.com/sites/CignaSharepoint/projectdelivery/SiteAssets/VisualDashboard/rotsanl.eot') format('woff'),
+                url('https://ts.accenture.com/sites/CignaSharepoint/projectdelivery/SiteAssets/VisualDashboard/rotsanl.ttf') format('truetype'),
+                url('https://ts.accenture.com/sites/CignaSharepoint/projectdelivery/SiteAssets/VisualDashboard/rotsanl.svg#AccentureRotis') format('svg');
+                font-weight: normal;
+                font-style: normal;
+            }
+            body,
+            span,
+            button,
+            div,
+            p,
+            table,
+            b,
+            a,
+            form {
+                font-family: "AccentureFont";
+            }
+            #s4-titlerow {
+                height: 0 !important;
+                padding-top: 0 !important;
+                padding-bottom: 0 !important;
+                margin-top: 0 !important;
+                margin-bottom: -10px !important;
+            }
+
+            #contentBox {
+                margin-left: 0;
+                min-width: 0px;
+            }
+
+            .filtermargin
+            {
+                margin-top:10px;
+            }
+            #suiteBar, .ms-cui-tt-span, .ms-tableRow, .ms-webpart-titleText,
+            .ms-core-navigation {
+                display: none;
+            }
+
+            .dropdown-menu {
+                width: 100%;
+            }
+
+            .btn-index {
+                width: 100%;
+            }
+            #loginbox {
+                margin-top: 30px;
+            }
+
+            #loginbox > div:first-child {
+                padding-bottom: 10px;
+            }
+
+            .odd{
+                background-color:#e8eaf6;
+            }
+            .even{
+                background-color:#c5cae9;
+            }
+            .iconmelon {
+                display: block;
+                margin: auto;
+            }
+
+            #form > div {
+                margin-bottom: 25px;
+            }
+
+            #form > div:last-child {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            .panel {
+                background-color: transparent;
+            }
+
+            .panel-body {
+                padding-top: 30px;
+                background-color: rgba(2555,255,255,.3);
+            }
+            .btn {
+                padding: 9px 13px;
+                border: 0 none;
+                font-weight: 700;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+            }
+            .btn:focus, .btn:active:focus, .btn.active:focus {
+                outline: 0 none;
+            }
+
+            .btn-primary {
+                background: #0099cc;
+                color: #ffffff;
+            }
+            .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+                background: #33a6cc;
+            }
+            .btn-primary:active, .btn-primary.active {
+                background: #007299;
+                box-shadow: none;
+            }
+            .dropdownButton{
+                border-style: groove;
+                border-color: #FFF;
+                border-width: 2px;
+            }
+
+            .tableForFilter {
+                table-layout: fixed;
+                width: 100%;
+            }
+
+            .tdForFilter {
+                white-space: nowrap;
+                overflow: hidden;         /* <- this does seem to be required */
+                text-overflow: ellipsis;
+            }
+
+
+            .glyphicon-refresh-animate {
+                -animation: spin .7s infinite linear;
+                -webkit-animation: spin2 .7s infinite linear;
+            }
+
+            @-webkit-keyframes spin2 {
+                from { -webkit-transform: rotate(0deg);}
+                to { -webkit-transform: rotate(360deg);}
+            }
+
+            @keyframes spin {
+                from { transform: scale(1) rotate(0deg);}
+                to { transform: scale(1) rotate(360deg);}
+            }
+
+            .heightForBackButton{
+                height:34px;
+            }
+
+            .tsgDropdownColor
+            {
+                background-color: #c8e6c9;
+            }
+            .locationDropdownColor
+            {
+                background-color: #dcedc8;
+            }
+            .statusDropdownColor
+            {
+                background-color: #f0f4c3;
+            }
+
+            .demadDropdownColor
+            {
+                background-color: #b2ebf2 ;
+            }
+
+            .selected {
+                background-color: #b3e5fc ;
+                list-style-position:inside;
+                border-top: 1px ridge black;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                display: block; !important
+
+            }
+            .unselected {
+                background-color: #ffffff ;
+                list-style-position:inside;
+                border-top: 1px ridge black;
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+            .navbar .navbar-nav {
+
+                display: inline-block;
+                float: none;
+            }
+
+            .navbar .navbar-collapse {
+
+                text-align: center;
+            }
+    	
+            .btnView {
+                width:100%;
+                
+            }
+
+            .btnView:hover {
+                color:blue;
+                border-width:2px;
+                border-style: solid;
+                border-color:blue;
+                background-color: #fff;
+                transition:2s;
+            }
+
+            div.wrapper{
+                width: 1147px;
+                height: 428px;
+                overflow: auto;
+            }	
+
+            div.wrapper1 {
+                width: 1147px;
+                height: 428px;
+                overflow: auto;
+            } 
+
+            .btn-info {
+                    color: #fff;
+                    background-color: #5bc0de;
+                    border-color: #46b8da; 
+                    border-width: 2px; 
+                    border-style: solid; 
+            }
+            .btnViewTsg{
+                color:blue;
+                border-width:2px;
+                border-style: solid;
+                border-color:blue;
+                background-color: #fff;
+            }
+            .viewTsg{
+               /* width:100%;*/
+                height: 35px;
+                color:#fff;
+                padding:10px;
+                font-weight: bold;
+                font-style:bold;
+                border-width:2px;
+                border-style: solid;
+                border-color:blue;
+                background-color: blue;   
+            }
+        </style>
+
+    </head>
+    <body>
+
+    <div class="container">
+        
+        <div ng-view></div>
+    </div>
+    </body>
+
+    <script type="text/ng-template" id="home.html">
+    	 <h2 class="text-center">Cigna-Accenture Invoicing</h2>   
+    	<form role="form">
+            
+            	<div class="form-group">
+                
+    	    		<div class="col-xs-4 filtermargin">
+                    		<div class="dropdown">
+                        			<button class="btn dropdownButton dropdown-toggle btn-index tsgDropdownColor" type="button" data-toggle="dropdown">
+                            			<span ng-hide="filterTSG" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                            			<span ng-hide="filterTSG">Loading</span> 
+    						<span ng-show="filterTSG">TSG </span> 
+    						<span ng-show="filterTSG" class="caret"></span>
+                        			</button>
+                        
+    		    			<ul class="dropdown-menu" ng-click="showList($event)">
+                            			<li ng-repeat="TSG in filterTSG" ng-click="toggleTsg(TSG)" ng-class="{true:'glyphicon glyphicon-ok selected', false:'unselected'}[tsg.indexOf(TSG) > -1]">
+                                				<span>{{TSG}}</span>
+                            			</li>
+                        			</ul>
+                    		</div>
+    			<hr/>
+    			<div class="col-md-12 text-center" style="font-size:17px">{{tsg[0]}}</div>
+                	</div>
+
+
+    	    <div class="col-xs-4 filtermargin">
+                    <div class="dropdown">
+                        <button class="btn dropdownButton dropdown-toggle btn-index statusDropdownColor" type="button"
+                                data-toggle="dropdown">
+                            <span ng-hide="filterASG" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                            <span ng-hide="filterASG">Loading</span>
+                            <span ng-show="filterASG">ASG</span>
+                            <span ng-show="filterASG" class="caret"></span>
+
+                        </button>
+                        <ul class="dropdown-menu" ng-click="showList($event)">
+                            <li ng-repeat="ASG in filterASG" ng-click="toggleSelection(ASG)" ng-class="{true:'glyphicon glyphicon-ok selected', false:'unselected'}[selection.indexOf(ASG) > -1]">
+                                <span>{{ASG}}</span>
+                            </li>
+                        </ul>
+                    </div>
+    		<hr/>
+    		<div class="col-md-12 text-center" style="font-size:17px">{{selection[0]}}</div>        
+                </div>        
+    	
+    		    
+    	    <div class="col-xs-4 filtermargin">
+                    <div class="dropdown ">
+                        <button class="btn dropdownButton dropdown-toggle btn-index locationDropdownColor" type="button" data-toggle="dropdown">
+                            <span ng-hide="filterLocation" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                            <span ng-hide="filterLocation">Loading</span>
+                            <span ng-show="filterLocation">Location </span>
+                            <span ng-show="filterLocation" class="caret"></span>
+                        </button>
+
+                        <ul class="dropdown-menu" ng-click="showList($event)">
+                            <li ng-repeat="Location in filterLocation" ng-click="toggleLocation(Location)" ng-class="{true:'glyphicon glyphicon-ok selected', false:'unselected'}[location.indexOf(Location) > -1]">
+                                <span>{{Location}} </span>
+                            </li>
+                        </ul>
+                    </div>
+    		<hr/>
+    		<div class="col-md-12 text-center" style="font-size:17px">{{location[0]}}</div>	        
+        	    </div>
+                
+                        <div class="col-xs-12 filtermargin">
+                		<button class="btn btn-info dropdownButton pull-right" type="button" ng-click="submit()">Submit</button>
+            	    </div>
+            <br/>
+
+
+            </div>
+        </form>
+
+    </script>
+
+    <script type="text/ng-template" id="main.html">
+
+    		<div class="row">
+                        <div class="col-md-1"><button class="btn btn-danger btn-sm btnView" ng-click="back1()">Back</button></div>
+                        <div class="col-md-offset-1 col-md-8"><button class="btn btn-default btnView btnViewTsg">{{tsg}} Resource View Page</button></div>
+                        <div class="col-md-offset-1 col-md-1"><button class="btn btn-danger btn-sm btnView " ng-click="back1()">Home</button></div>
+            </div>
+    	    
+            </hr>
+    	
+            <div class="row" style="margin-top:15px">
+                <div class="col-md-3"><button type="button" class="btn btn-primary btnView" ng-click="enterRes()">Add Resource</button></div>
+    			
+                <div class="dropdown col-md-3">
+      				<button class="btn btn-primary btnView dropdown-toggle" type="button" data-toggle="dropdown">Edit
+      				<span class="caret"></span></button>
+      				<ul class="dropdown-menu">
+        					<li><a href="#year2016">2016</a></li>
+        					
+      				</ul>
+    			</div> 
+
+                <div class="col-md-3"><button type="button" class="btn btn-primary btnView" ng-click="invoiceDashboard()">Invoice Dashboard</button></div>
+                <!--<button type="button" class="btn btn-primary" ng-click="editData()">Resource Forecast EDIT/ADD</button>-->
+                <div class="col-md-3"><button type="button" class="btn btn-primary btnView" ng-click="rdashboard()">Resource Dashboard</button></div>          
+
+            </div>
+            <!-- <input type="button" value="sunbmit" ng-click="test()">	 -->
+
+            <!-- <div class="row form-group" style="margin:5px 0px;width:500px;left:100px;">
+
+                <div class="text-center"><input type="text" class="form-control" ng-model="search" placeholder="search"></div>
+
+            </div> -->
+    	<div class="row">
+        <div class="col-md-6 text-center">
+            <h4>TSG:</h4>
+            {{TSG}}
+        </div>
+
+         <div class="col-md-6 text-center">
+             <h4>ASG:</h4>
+             <select class="form-control" ng-model="asgValue" ng-change="selectedAsgValue(asgValue)">
+                 <option value="asg">Select All ASGs</option>
+                 <option ng-repeat="user in finalActuals | unique:'SubPortfolio'">{{user.SubPortfolio}}</option>
+             </select>
+         </div>   
+        </div>
+
+    	<div class="row text-center">
+                    <dir-pagination-controls
+                            max-size="5"
+                            direction-links="true"
+                            boundary-links="false"
+                            class="pagination-sm">
+                    </dir-pagination-controls>
+                </div>    
+    	<div>
+        
+        
+        <div class="wrapper">
+            	<!-- <table class="table" style="margin-top:5px;margin-bottom:5px">
+                    <thead>
+                            <tr>
+                                  <th>Resource Name</th>
+                                  <th>TSG</th>
+                		          <th>ASG</th>
+                                  <th>Location</th>
+                                  <th>RoleType</th>
+                                  <th>EnterpriseId</th>
+                                  <th>Portfolio</th>
+                                  <th>Sub-Portfolio</th>
+                                  <th>Project</th>
+                                  <th>Sub-project</th>
+                                  <th>Module</th>
+                		          <th>Clarity ID</th>
+                                  <th ng-repeat="m in res">{{m}}</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="user in groups | filter:search | itemsPerPage:6">
+                                    <td>
+                        			        {{user.Resource_x0020_Name}}	
+                        			</td>
+                        			<td>
+                                            {{user.Title}}	
+                                    </td>
+                                    <td>
+                                            {{user.ASG}} 
+                                    </td>
+                        			<td>
+                        				    {{user.Location}}	
+                        			</td>
+                                    <td>
+                                            {{user.Role_x0020_type}}
+                                    </td>
+                                    <td>
+                                            {{user.Enterprise_x0020_ID}}
+                                    </td>
+                                    <td>
+                                            {{user.Portfolio}}
+                                    </td>
+                                    <td>
+                                            {{user.Sub_x0020__x002d__x0020_Portfoli}}
+                                    </td>
+                                    <td>
+                                     	    {{user.Invoice_x0020_Forecast}}
+                                    </td>
+                                    <td>
+                                     	    {{user.Resource_x0020_Forecast_x0020__x}}
+                                    </td>
+                                    <td>
+                                            {{user.Sub_x0020_Project}}
+                                    </td>
+                                    <td>
+                                            {{user.Clarity_x0020_Id}}
+                                    </td>
+                			
+                                    <td ng-repeat="months in selectedMonth">{{user[months]}}</td>                                         
+                			
+                        </tr>
+            	</tbody>		
+
+            	</table> -->
+                <!-- <input type="checkbox" ng-model="selectALl" ng-click="checkAll()">SelectAll -->
+                <table class="table" style="margin-top:5px;margin-bottom:5px">
+                    <thead>
+                            <tr>
+                                <th>Active</th>
+                                <th>ASG</th>
+                                <th>Portfolio</th>
+                                <th>SubPortfolio</th>
+                                <th>Project</th>
+                                <th>ClarityId</th>
+                                <th>Actuals</th>
+                                <th>Estimate</th>
+                                <th>Total Actuals</th>         
+                            </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="user in finalActuals | filter:search | itemsPerPage:15">
+                                <td><input type="checkbox" ng-checked="selectALl" ng-model="checkbox[$index]"></td>
+                                <td>{{user.ASG}}</td>
+                                <td>{{user.Portfolio}}</td>
+                                <td>{{user.SubPortfolio}}</td>
+                                <td>{{user.Project}}</td>
+                                <td>{{user.ClarityId}}</td>
+                                <td>{{user.Actuals}}</td>
+                                <td><input type="textbox" ng-model="estimate"></td>
+                                <td>{{user.Actuals++estimate}}</td>
+
+                            </tr>
+                             </tbody>
+                </table>
+            </div>
+                            	
+                </div>
+    	    <div class="text-center">
+                    <dir-pagination-controls
+                            max-size="5"
+                            direction-links="true"
+                            boundary-links="false"
+                            class="pagination-sm">
+                    </dir-pagination-controls>
+                </div>
+                <div class="row">
+                    <input type="button" class="btn btn-default" value="proceed" ng-click="next()">
+                </div>
+                
+    	
+    </script>
+    <script type="text/ng-template" id="allocate.html">
+        <table class="table table-bordered">
+            <thead>
+                <th>Expand</th>
+                <th>ASG</th>
+                <th>Portfolio</th>
+                <th>SubPortfolio</th>
+                <th>ProjectName</th>
+                <th>ClarityId</th>
+                <th>Actuals</th>
+                <th ng-repeat="month in monthForecastG">{{month}}</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="project in activeProjects">
+                <td>
+                  <input type="button" value="-" ng-if="person" ng-click="collapse()" class="btn btn-default">
+                  <input type="button" value="+" ng-if="!person" ng-click="expand(project)" class="btn btn-default">
+                </td>
+                <td>{{project.ASG}}</td>
+                <td>{{project.Portfolio}}</td>
+                <td>{{project.SubPortfolio}}</td>
+                <td>{{project.Project}}</td>
+                <td>{{project.ClarityId}}</td>
+                <td>{{project.Actuals}}</td>
+                <td>{{project.Forecast1}}</td>
+                <td>{{project.Forecast2}}</td>
+                <td>{{project.Forecast3}}</td>
+                <td>{{project.Forecast4}}</td>
+                <td>{{project.Forecast5}}</td>
+
+            </tr>
+            <tr></tr>
+             <tr ng-if="person" ng-repeat="resource in resourceDetails">
+                <td colspan="6">{{resource.Name}}</td>
+                <td>{{resource.Actuals}}</td>
+                <td>{{resource.forecast1}}</td>
+                <td>{{resource.forecast2}}</td>
+                <td>{{resource.forecast3}}</td>
+                <td>{{resource.forecast4}}</td>
+                <td>{{resource.forecast5}}</td>
+              </tr>
+              </tbody>
+        </table>
+        <!-- <div class="table-bordered"> -->
+            <!-- <div class="row table table-bordered" ng-repeat="project in activeProjects">
+                <div class="col-md-1">
+                    <input type="button" value="+" ng-click="expand(project)" class="btn btn-default">
+                </div>
+                <div class="col-md-1">{{project.ASG}}</div>
+                <div class="col-md-1">{{project.Portfolio}}</div>
+                <div class="col-md-1">{{project.SubPortfolio}}</div>
+                <div class="col-md-1">{{project.Project}}</div>
+                <div class="col-md-1">{{project.ClarityId}}</div>
+                <div class="col-md-1">{{project.Actuals}}</div>
+                <div class="col-md-1">{{project.Forecast1}}</div>
+                <div class="col-md-1">{{project.Forecast2}}</div>
+                <div class="col-md-1">{{project.Forecast3}}</div>
+                <div class="col-md-1">{{project.Forecast4}}</div>
+                <div class="col-md-1">{{project.Forecast5}}</div>
+                <div class="row" ng-if="person" ng-repeat="resource in resourceDetails">
+                    
+                    <div class="col-md-6">{{resource.Name}}</div>
+                    <div class="col-md-1">{{resource.Actuals}}</div>
+                    <div class="col-md-1">{{resource.forecast1}}</div>
+                    <div class="col-md-1">{{resource.forecast2}}</div>
+                    <div class="col-md-1">{{resource.forecast3}}</div>
+                    <div class="col-md-1">{{resource.forecast4}}</div>
+                    <div class="col-md-1">{{resource.forecast5}}</div>
+                </div>
+            </div> -->
+       <!--  </div> -->
+    </script>
+    <script type="text/ng-template" id="edit.html">
+    		
+            <div class="row">
+                <div class="col-md-1"><button class="btn btn-danger btn-sm btnView" ng-click="back()">Back</button></div>
+                <div class="col-md-offset-1 col-md-8"><button class="btn btn-default btnView btnViewTsg">{{tsg}} Resource Add Page</button></div>
+                <div class="col-md-offset-1 col-md-1"><button class="btn btn-danger btn-sm btnView " ng-click="backToHome()">Home</button></div>
+            </div>
+    		
+    		<br>
+    		<table class="table table-bordered table-hover table-condensed" style="margin-top:30px">
+                    	<tr style="font-weight: bold">
+                      		<td>ResourceNAme</td>
+                      		<td >TSG</td>
+    		  		        <td>ASG</td>
+                      		<td >Location</td>
+                      		<td >RoleType</td>
+                      		<td >EnterpriseId</td>
+    			        </tr>
+    		
+    		
+
+    		<tr ng-repeat="item in invoice.items">
+                		<td><input type="text" class="form-control" ng-model="item.resourceName"></td>           
+                		<td>{{tsg}}</td>
+                		<td>{{asg}}</td>
+    			        <td>{{location}}</td>
+    			        <td>
+            				<select class="form-control" ng-model="item.rollType">
+            					<option value="core">core</option>
+            					<option value="flex">flex</option>
+                                <option value="ratecard">ratecard</option>
+            				</select>
+                        </td>
+            			<td><input type="text" class="form-control"  ng-model="item.eid" ng-required></td>
+                   		<td><a href ng-click="addItem(item)" class="btn btn-small">add item</a></td>
+            </tr>
+    		
+    	</table>
+
+    	<table class="table">
+    		<thead>
+    			<tr>
+    				<th>ResourceNAme</th>
+                      		<th >RoleType</th>
+                      		<th >EnterpriseId</th>
+    				<th>Clarity ID</th>
+    				<th>Project Name</th>
+    		  		<th >Portfolio</th>
+    			</tr>
+    		</thead>
+    		<tbody>
+    			<tr ng-repeat="d in invoice.items">
+    				<td>{{d.Name}}</td>
+    				<td>{{d.RollType}}</td>
+    				<td>{{d.Eid}}</td>
+    				<td>{{d.ClarityId}}</td>
+    				<td>{{d.Pname}}</td>
+    				<td>{{d.Portfolio}}</td>
+    			</tr>
+    		</tbody>
+    	</table>
+    	<div class="col-md-12 text-center">
+    		<button class="btn btn-primary" ng-click="addUser()">Save</button>
+    	</div>
+    </script>
+
+
+    <script type="text/ng-template" id="loading.html"> 
+        <div class="text-center">
+            <img src="../SiteAssets/InvoiceAutomationTest/loading.gif">
+        </div>
+    </script>
+
+
+
+    <script type="text/ng-template" id="config.html"> 
+        <div class="row">
+            <div class="col-md-6 text-center" ng-click="contractDet()">Contract Details</div>
+            <div class="col-md-6 text-center" ng-click="monthChange()">MonthOnMonthChange</div>
+        </div>
+        <div ng-switch="menu">
+            <div ng-switch-when="contract">    
+                StartDate Of the contract<input type="text" id="calendar" ng-model="startdate" />
+                EndDate Of the Contract<input type="text" id="calendar1" ng-model="enddate" />
+                <input type="button" class="btn btn-default" value="save" ng-click="saveConfig()"/>
+             </div>
+             <div ng-switch-when="month">    
+               BillAmount-Flex<input type="text" ng-model="rate">
+               BillAmount-Ratecard<input type="text" ng-model="rate1">
+               OffshoreDays<input type="text" ng-model="offDays">
+               OnshoreDays<input type="text" ng-model="onDays">
+               NearShoreDays<input type="text" ng-model="nDays">
+               EditableStartDate<input type="text" datepicker ng-model="editstartDate">
+               EditableEndDate<input type="text" datepicker ng-model="editendDate">
+               ClientApprovalDate<input type="text" datepicker ng-model="clientApprovalDate">
+                <input type="button" class="btn btn-default" value="save" ng-click="saveMonthChanges()"/>
+             </div>
+             <div ng-switch-default>
+                 <h1>Switch</h1>
+                 <p>Select topic from the dropdown, to switch the content of this DIV.</p>
+              </div>
+
+        </div>   
+    </script>
+
+
+
+    <script type="text/ng-template" id="dashboard.html"> 
+
+        <div class="row">
+                        <div class="col-md-1"><button class="btn btn-default btn-sm btnView" ng-click="back()">Back</button></div>
+                        <div class="col-md-1"><input type="button" class="btn btnView btnViewTsg" value="Export" ng-click="saveFile()"></div>
+                        <div class="col-md-8 viewTsg text-center" style="background-color:blue;">{{tsg}} Invoice Dashboard</div>
+                        <div class="col-md-1"><button class="btn btn-default btn-sm btnView" ng-click="backToMain()">Home</button></div>
+                        <div class="col-md-1"></div>
+        </div>
+        
+            
+        <div ng-show="showLoader" class="text-center">
+            <img src="../SiteAssets/InvoiceAutomationTest/loading.gif">
+        </div>
+        
+        <div class="row" ng-show="!showLoader">
+            <div class="col-md-6" style="margin-top:15px">
+                        <select class="form-control" ng-model="year" ng-change="getYear()">
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                        </select>
+                    </div>
+                <div class="col-md-6" style="margin-top:15px">
+                    <select class="form-control" ng-model="ddlmonth" ng-options="month.Id as month.Name for month in months track by month.Id" ng-disabled="monthDisabled" ng-change="GetValue()"></select>
+                    </div>
+                
+        </div>
+            <br/>   
+        <div class="row">
+        <table class="table table-bordered" ng-show="visible" style="border-style: solid">
+            <thead>
+                <tr style="background-color:#A9A9A9">
+                    <th>Type</th>
+                    <th class="text-center" ng-repeat="months in displayMonths">{{months}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Total Inclusive oF Taxes</b></td>
+                    <td>
+                    <b>
+                    {{coreTaxFinalArray[0]+ssgFlexTaxFinal[0]+ssgRateTaxFinal[0]+expensesTax+RateTrueups+FlexTrueups | currency}}
+                    </b>
+                    </td>
+                    <td>
+                    <b>
+                    {{coreTaxFinalArray[1]+ssgFlexTaxFinal[1]+ssgRateTaxFinal[1]+expensesTax1+RateTrueups1+FlexTrueups1 | currency}}
+                    </b>
+                    </td>
+                    <td>
+                    <b>
+                    {{coreTaxFinalArray[2]+ssgFlexTaxFinal[2]+ssgRateTaxFinal[2]+expensesTax2+RateTrueups2+FlexTrueups2 | currency}}   
+                    </b>
+                    </td>
+                    <td>
+                    <b>
+                    {{coreTaxFinalArray[3]+ssgFlexTaxFinal[3]+ssgRateTaxFinal[3]+expensesTax3+RateTrueups3+FlexTrueups3| currency}}
+                    
+                    </b>
+                    </td>
+                    <td>
+                    <b>
+                    {{coreTaxFinalArray[4]+ssgFlexTaxFinal[4]+ssgRateTaxFinal[4]+expensesTax4+RateTrueups4+FlexTrueups4| currency}} 
+                    </b>
+                    </td>
+                    <td>
+                    <b>
+                    {{coreTaxFinalArray[5]+ssgFlexTaxFinal[5]+ssgRateTaxFinal[5]+expensesTax5+RateTrueups5+FlexTrueups5| currency}} 
+                    </b>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td><b>Core</b></td>
+                    <td>{{coreFinalArray[0] | currency}}</td>
+                    <td>{{coreFinalArray[1] | currency}}</td>
+                    <td>{{coreFinalArray[2] | currency}}</td>
+                    <td>{{coreFinalArray[3] | currency}}</td>
+                    <td>{{coreFinalArray[4] | currency}}</td>
+                    <td>{{coreFinalArray[5] | currency}}</td>
+                </tr>
+                <tr>
+                    <td><b>Core Inclusive of Taxes</b></td>
+                    <td>{{coreTaxFinalArray[0] | currency}}</td>
+                    <td>{{coreTaxFinalArray[1] | currency}}</td>
+                    <td>{{coreTaxFinalArray[2] | currency}}</td>
+                    <td>{{coreTaxFinalArray[3] | currency}}</td>
+                    <td>{{coreTaxFinalArray[4] | currency}}</td>
+                    <td>{{coreTaxFinalArray[5]| currency}}</td>
+                </tr>
+                <tr>
+                    <td><b>Flex</b></td>
+                    <td>{{ssgFlexFinal[0]| currency}}</td>
+                    <td>{{ssgFlexFinal[1]| currency}}</td>
+                    <td>{{ssgFlexFinal[2]| currency}}</td>
+                    <td>{{ssgFlexFinal[3]| currency}}</td>
+                    <td>{{ssgFlexFinal[4]| currency}}</td>
+                    <td>{{ssgFlexFinal[5]| currency}}</td>
+                    
+                </tr>
+                <tr>
+                    <td><b>Flex Trueups</b></td>
+                    <td><input type="number" ng-model="FlexTrueups" ng-init="FlexTrueups=0"></td>
+                    <td><input type="number" ng-model="FlexTrueups1" ng-init="FlexTrueups1=0"></td>
+                    <td><input type="number" ng-model="FlexTrueups2" ng-init="FlexTrueups2=0"></td>
+                    <td><input type="number" ng-model="FlexTrueups3" ng-init="FlexTrueups3=0"></td>
+                    <td><input type="number" ng-model="FlexTrueups4" ng-init="FlexTrueups4=0"></td>
+                    <td><input type="number" ng-model="FlexTrueups5" ng-init="FlexTrueups5=0"></td>
+                </tr>
+                <tr>
+                    <td><b>Flex Inclusive of Taxes</b></td>
+                    <td>{{ssgFlexTaxFinal[0]+FlexTrueups| currency}}</td>
+                    <td>{{ssgFlexTaxFinal[1]+FlexTrueups1| currency}}</td>
+                    <td>{{ssgFlexTaxFinal[2]+FlexTrueups2| currency}}</td>
+                    <td>{{ssgFlexTaxFinal[3]+FlexTrueups3| currency}}</td>
+                    <td>{{ssgFlexTaxFinal[4]+FlexTrueups4| currency}}</td>
+                    <td>{{ssgFlexTaxFinal[5]++FlexTrueups5| currency}}</td>
+                </tr>
+                
+               
+                <tr>
+                    <td><b>Ratecard</b></td>
+                     <td>{{ssgRateFinal[0]| currency}}</td>
+                    <td>{{ssgRateFinal[1]| currency}}</td>
+                    <td>{{ssgRateFinal[2]| currency}}</td>
+                    <td>{{ssgRateFinal[3]| currency}}</td>
+                    <td>{{ssgRateFinal[4]| currency}}</td>
+                    <td>{{ssgRateFinal[5]| currency}}</td>
+                </tr>
+                
+                <tr>
+                    <td><b>RateCard Trueups</b></td>
+                    <td><input type="number" ng-model="RateTrueups" ng-init="RateTrueups=0"></td>
+                    <td><input type="number" ng-model="RateTrueups1" ng-init="RateTrueups1=0"></td>
+                    <td><input type="number" ng-model="RateTrueups2" ng-init="RateTrueups2=0"></td>
+                    <td><input type="number" ng-model="RateTrueups3" ng-init="RateTrueups3=0"></td>
+                    <td><input type="number" ng-model="RateTrueups4" ng-init="RateTrueups4=0"></td>
+                    <td><input type="number" ng-model="RateTrueups5" ng-init="RateTrueups5=0"></td>
+                </tr>
+                
+                <tr>
+                    <td><b>Rate Inclusive of Taxes</b></td>
+                    <td>{{ssgRateTaxFinal[0]+RateTrueups| currency}}</td>
+                    <td>{{ssgRateTaxFinal[1]+RateTrueups1| currency}}</td>
+                    <td>{{ssgRateTaxFinal[2]+RateTrueups2| currency}}</td>
+                    <td>{{ssgRateTaxFinal[3]+RateTrueups3| currency}}</td>
+                    <td>{{ssgRateTaxFinal[4]+RateTrueups4| currency}}</td>
+                    <td>{{ssgRateTaxFinal[5]+RateTrueups5| currency}}</td>
+                </tr>
+                
+
+                <tr>
+                    <td><b>Expense</b></td>
+                    <td><input type="number" ng-model="expenses" ng-init="expenses=0" ng-change="expenseTax(expenses)" ></td>
+                    <td><input type="number" ng-model="expenses1" ng-init="expenses1=0" ng-change="expenseTax1(expenses1)"></td>
+                    <td><input type="number" ng-model="expenses2" ng-init="expenses2=0" ng-change="expenseTax2(expenses2)"></td>
+                    <td><input type="number" ng-model="expenses3" ng-init="expenses3=0" ng-change="expenseTax3(expenses3)"></td>
+                    <td><input type="number" ng-model="expenses4" ng-init="expenses4=0" ng-change="expenseTax4(expenses4)"></td>
+                    <td><input type="number" ng-model="expenses5" ng-init="expenses5=0" ng-change="expenseTax5(expenses5)"></td>
+                </tr>
+                <tr>
+                        <td><b>Expenses Inclusive of Taxes</b></td>
+                        <td>
+                        <input type="text" ng-model="expensesTax" ng-init="expensesTax=0" readonly>
+                        </td>
+                        <td>
+                        <input type="text" ng-model="expensesTax1" ng-init="expensesTax1=0" readonly>
+                        </td>
+                        <td>
+                        <input type="text" ng-model="expensesTax2" ng-init="expensesTax2=0" readonly>
+                        </td>    
+                        <td>
+                          <input type="text" ng-model="expensesTax3" ng-init="expensesTax3=0" readonly>
+                        </td>  
+                        <td>
+                        <input type="text" ng-model="expensesTax4" ng-init="expensesTax4=0" readonly>
+                        </td>
+                        <td>
+                        <input type="text" ng-model="expensesTax5" ng-init="expensesTax5=0" readonly>
+                        </td>
+                </tr>
+                
+
+
+                <tr>
+                <td><b>Total</b></td>
+                    <td><b>
+                    {{coreFinalArray[0]+ssgRateFinal[0]+ssgFlexFinal[0]+expenses+RateTrueups+FlexTrueups | currency}}
+                       </b>  
+                    </td>
+                    <td>
+                    <b>
+                    {{coreFinalArray[1]+ssgRateFinal[1]+ssgFlexFinal[1]+expenses1+RateTrueups1+FlexTrueups1| currency}}
+                    </b>
+                    </td>
+                    <td>
+                    <b>
+                    {{coreFinalArray[2]+ssgRateFinal[2]+ssgFlexFinal[2]+expenses2+RateTrueups2+FlexTrueups2| currency}}
+                    </b>
+                    </td>
+                    <td>
+                    <b>
+                    {{coreFinalArray[3]+ssgRateFinal[3]+ssgFlexFinal[3]+expenses3+RateTrueups3+FlexTrueups3| currency}}
+                    </b>
+                    </td>
+                    <td>
+                    <b>
+                    {{coreFinalArray[4]+ssgRateFinal[4]+ssgFlexFinal[4]+expenses4+RateTrueups4+FlexTrueups4| currency}}
+                    </b>
+                    </td>
+                    <td>
+                    <b>{{coreFinalArray[5]+ssgRateFinal[5]+ssgFlexFinal[5]+expenses5+RateTrueups5+FlexTrueups5| currency}}
+                    </b>
+                    </td>
+                 
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        
+        <!-- <div class="wrapper">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <input type="text" class="form-control" ng-model="searchFilter">
+                <input type="button" value="button" ng-click="init()">
+            </div>
+        </div> -->
+        <div class="row" ng-show="visible">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 viewTsg text-center"> 
+                {{tsg}} Invoice Details
+            </div>
+            <div class="col-md-2"><input type="text" class="form-control" ng-model="searchFilter" placeholder="search here"></div>
+        </div>
+        <br/>
+        <div class="row wrapper">
+        <table class="table table-bordered" ng-show="visible" style="border-style: solid">
+             
+            <thead>
+                <tr style="background-color:#A9A9A9">
+
+                    <th class="text-center">ASG</th>
+                    <th class="text-center">ProjectName</th>
+                    <th class="text-center">Portfolio</th>
+                    <th class="text-center">ClarityId</th>
+                    
+                    <th class="text-center" ng-repeat="months in displayMonths">{{months}}</th>
+                    <th class="text-center">Sum</th>
+                </tr>
+            </thead>
+            <tbody>
+               
+                <tr ng-repeat="data in finalValueArrayView2 | filter:searchFilter" ng-init="setTotals(data)">
+                    <td>{{data.ASG}}</td>
+                    <td>{{data.ProjectName}}</td>
+                    <td>{{data.Portfolio}}</td>
+                    <td>{{data.ClarityId}}</td>
+                    <td>{{data.firstMonth | number:2 }}</td>
+                    <td>{{data.secMonth | number:2}}</td>
+                    <td>{{data.thiMonth | number:2}}</td>
+                    <td>{{data.fouMonth | number:2}}</td>
+                    <td>{{data.fifMonth | number:2}}</td>
+                    <td>{{data.sixMonth | number:2}}</td>
+                    <td>{{data.firstMonth+data.secMonth+data.thiMonth+data.fouMonth+data.fifMonth+data.sixMonth | number:2}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Total</td>
+                    <td>{{Total | number:2}}</td>
+                    <td>{{Total1 | number:2}}</td>
+                    <td>{{Total2 | number:2}}</td>
+                    <td>{{Total3 | number:2}}</td>
+                    <td>{{Total4 | number:2}}</td>
+                    <td>{{Total5 | number:2}}</td>
+                    
+                </tr>
+
+             </tbody>
+        </table>
+        </div>
+
+
+    </script>
+
+    <script type="text/ng-template" id="rdashboard.html"> 
+    	<div class="row">
+                <div class="col-md-1"><button class="btn btn-danger btn-sm btnView" ng-click="back()">Back</button></div>
+                <div class="col-md-offset-1 col-md-8"><button class="btn btn-default btnView btnViewTsg">{{tsg}} Resource Dashboard</button></div>
+                <div class="col-md-offset-1 col-md-1"><button class="btn btn-danger btn-sm btnView " ng-click="backToHome()">Home</button></div>
+        </div>
+
+        <div ng-show="showLoader">
+            <img src="../SiteAssets/InvoiceAutomationTest/loading.gif">
+        </div>
+
+        <table class="table" style="margin-top:10px" ng-show="!showLoader">
+            <thead>
+                <tr>
+                   <th ng-repeat="m in res">{{m}}</th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Core</td>
+                    <td></td>
+                    <td class="text-center">{{month_core1}}</td>
+                    <td class="text-center">{{month_core2}}</td>
+                    <td class="text-center">{{month_core3}}</td>
+                    <td class="text-center">{{month_core4}}</td>
+                    <td class="text-center">{{month_core5}}</td>
+                    <td class="text-center">{{month_core6}}</td>
+
+                </tr>
+                <tr>
+                    <td>Flex</td>
+                    <td></td>
+                    <td class="text-center">{{month_flex1}}</td>
+                    <td class="text-center">{{month_flex2}}</td>
+                    <td class="text-center">{{month_flex3}}</td>
+                    <td class="text-center">{{month_flex4}}</td>
+                    <td class="text-center">{{month_flex5}}</td>
+                    <td class="text-center">{{month_flex6}}</td>
+                </tr>
+                <tr>
+                    <td>Ratecard</td>
+                    <td></td>
+                    <td class="text-center">{{month_rc1}}</td>
+                    <td class="text-center">{{month_rc2}}</td>
+                    <td class="text-center">{{month_rc3}}</td>
+                    <td class="text-center">{{month_rc4}}</td>
+                    <td class="text-center">{{month_rc5}}</td>
+                    <td class="text-center">{{month_rc6}}</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td></td>
+                    <td class="text-center">{{month_total1}}</td>
+                    <td class="text-center">{{month_total2}}</td>
+                    <td class="text-center">{{month_total3}}</td>
+                    <td class="text-center">{{month_total4}}</td>
+                    <td class="text-center">{{month_total5}}</td>
+                    <td class="text-center">{{month_total6}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <div class="row text-center">
+                    <dir-pagination-controls
+                            max-size="5"
+                            direction-links="true"
+                            boundary-links="false"
+                            class="pagination-sm">
+                    </dir-pagination-controls>
+                </div>    
+        <div>
+        
+        
+        <div class="wrapper">
+                <table class="table" style="margin-top:5px;margin-bottom:5px">
+                    <thead>
+                            <tr>
+                                  <th>Resource Name</th>
+                                  <th>TSG</th>
+                                  <th>ASG</th>
+                                  <th>Location</th>
+                                  <th>RoleType</th>
+                                  <th>EnterpriseId</th>
+                                  <th>Portfolio</th>
+                                  <th>Sub-Portfolio</th>
+                                  <th>Project</th>
+                                  <th>Sub-project</th>
+                                  <th>Module</th>
+                                  <th>Clarity ID</th>
+                                  <th ng-repeat="m in res">{{m}}</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="user in mainArray | filter:search | itemsPerPage:6">
+                                    <td>
+                                            {{user.Resource_x0020_Name}}    
+                                    </td>
+                                    <td>
+                                            {{user.Title}}  
+                                    </td>
+                                    <td>
+                                            {{user.ASG}} 
+                                    </td>
+                                    <td>
+                                            {{user.Location}}   
+                                    </td>
+                                    <td>
+                                            {{user.Role_x0020_type}}
+                                    </td>
+                                    <td>
+                                            {{user.Enterprise_x0020_ID}}
+                                    </td>
+                                    <td>
+                                            {{user.Portfolio}}
+                                    </td>
+                                    <td>
+                                            {{user.Sub_x0020__x002d__x0020_Portfoli}}
+                                    </td>
+                                    <td>
+                                            {{user.Invoice_x0020_Forecast}}
+                                    </td>
+                                    <td>
+                                            {{user.Resource_x0020_Forecast_x0020__x}}
+                                    </td>
+                                    <td>
+                                            {{user.Sub_x0020_Project}}
+                                    </td>
+                                    <td>
+                                            {{user.Clarity_x0020_Id}}
+                                    </td>
+                            
+                                    <td ng-repeat="months in selectedMonth">{{user[months]}}</td>                                         
+                            
+                        </tr>
+                </tbody>        
+
+                </table>
+            </div>
+                                
+                </div>
+            <div class="text-center">
+                    <dir-pagination-controls
+                            max-size="5"
+                            direction-links="true"
+                            boundary-links="false"
+                            class="pagination-sm">
+                    </dir-pagination-controls>
+                </div>
+    </script>
+
+
+
+    <script type="text/ng-template" id="year2016.html"> 
+    	<div class="row">
+                <div class="col-md-1"><button class="btn btn-danger btn-sm btnView" ng-click="backToMain()">Back</button></div>
+                <div class="col-md-offset-1 col-md-8"><button class="btn btn-default btnView btnViewTsg">{{tsg}} Resource Edit Page</button></div>
+                <div class="col-md-offset-1 col-md-1"><button class="btn btn-danger btn-sm btnView " ng-click="backToHome()">Home</button></div>
+            </div>
+
+    	
+
+
+    	<div class="row text-center">
+                    <dir-pagination-controls
+                            max-size="5"
+                            direction-links="true"
+                            boundary-links="false"
+                            class="pagination-sm">
+                    </dir-pagination-controls>
+                </div>
+
+                <div class="row">
+            <input type="text" class="col-md-6 form-control" ng-model="searchsearch" style="margin-top:5px;margin-bottom:5px">
+        </div>
+
+        <div class="wrapper">
+    	<table class="table">
+                <thead>
+                    <tr>
+        		          <th>Resource Name</th>
+                          <th>TSG</th>
+        		          <th>ASG</th>
+                          <th>Location</th>
+                          <th>RoleType</th>
+                          <th>EnterpriseId</th>
+                          <th>Portfolio</th>
+                          <th>Sub-portfolio</th>
+                          <th>Project</th>
+                          <th>Sub-project</th>
+                          <th>Module</th>
+                          <th>Clarity ID</th>
+                          <th ng-repeat="m in res">{{m}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr dir-paginate="user in groups |filter:searchsearch|itemsPerPage:10">
+                         <td>
+    			                 {{user.Resource_x0020_Name}}	
+    			         </td>
+    			         <td>
+                         	     <input type="text" ng-model="user.Title">
+                         </td>
+                         <td>
+                                 <input type="text" ng-model="user.ASG"> 
+                         </td>
+    			         <td>
+    				             <input type="text" ng-model="user.Location">	
+    			         </td>
+                         <td>
+                                 <input type="text" ng-model="user.Role_x0020_type">
+                         </td>
+                         <td>
+                                 {{user.Enterprise_x0020_ID}}
+                         </td>
+                        <td>
+                                 <input type="text" ng-model="user.Portfolio">
+                        </td>
+                        <td>
+                                 <input type="text" ng-model="user.Sub_x0020__x002d__x0020_Portfoli">
+                        </td>
+                        <td>
+                         	     <input type="text" ng-model="user.Invoice_x0020_Forecast">
+                        </td>
+                        <td>
+                         	     <input type="text" ng-model="user.Resource_x0020_Forecast_x0020__x">
+                        </td>
+                        <td>
+                         	     <input type="text" ng-model="user.Sub_x0020_Project">
+                        </td>
+                        <td>
+                                 <input type="text" ng-model="user.Clarity_x0020_Id">
+                        </td> 
+    			
+                		<td ng-repeat="months in selectedMonth"><input type="text" ng-model="user[months]"></td>
+                		<td>
+                		     <input type="checkbox" ng-change="editItems(user)" ng-model="check">
+                        </td>
+                                  
+                        </tr>
+    			</tbody>
+
+    	</table>
+        </div>
+    	<div class="row text-center">
+    		<button class="btn btn-danger" ng-click="update()">Update</button>	
+    	</div>
+    	<div class="row text-center">
+                    <dir-pagination-controls
+                            max-size="5"
+                            direction-links="true"
+                            boundary-links="false"
+                            class="pagination-sm">
+                    </dir-pagination-controls>
+                </div>
+
+    </script>
+
+
+    </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
